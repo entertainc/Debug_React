@@ -16,10 +16,16 @@ export default function Hook() {
 
   useEffect(() => {
     countRef.current ++;
+    console.log('effect1')
     return () => {
       console.log('useEffect destory function')
     }
   }, [count])
+
+  useEffect(() => {
+    console.warn(count + count2);
+    console.log('effect2')
+  }, [count, count2])
 
   const increase = useCallback(function () {
     setCount(count + 1);
@@ -29,19 +35,19 @@ export default function Hook() {
     setCount(pre => pre + 4);
     setCount2(pre => pre + 2);
     setCount2(pre => pre + 3);
-  }, [])
+  }, [count])
 
   const memoValue = useMemo(() => {
     return count;
   }, [count])
 
-  useLayoutEffect(() => {
-    const dom = document.getElementById('test')
-    // console.log('useLayoutEffect create', dom)
-    return () => {
-      console.log('useLayoutEffect destoryed')
-    }
-  })
+  // useLayoutEffect(() => {
+  //   const dom = document.getElementById('test')
+  //   // console.log('useLayoutEffect create', dom)
+  //   return () => {
+  //     console.log('useLayoutEffect destoryed')
+  //   }
+  // })
 
   return (
     <div id="test">

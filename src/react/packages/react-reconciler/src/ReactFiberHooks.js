@@ -1113,6 +1113,8 @@ function updateReducer<S, I, A>(
     let newBaseQueueFirst = null;
     let newBaseQueueLast = null;
     let update = first;
+    console.log('useState - baseQueue1 = ', baseQueue);
+    console.log('useState - first = ', first);
     do {
       // An extra OffscreenLane bit is added to updates that were made to
       // a hidden tree, so that we can distinguish them from updates that were
@@ -1817,6 +1819,7 @@ function mountState<S>(
   initialState: (() => S) | S,
 ): [S, Dispatch<BasicStateAction<S>>] {
   const hook = mountWorkInProgressHook();
+  console.log('useState - beginMountWorkInProgressHook', hook);
   if (typeof initialState === 'function') {
     // $FlowFixMe: Flow doesn't like mixed types
     initialState = initialState();
@@ -1884,6 +1887,7 @@ function pushEffect(
       componentUpdateQueue.lastEffect = effect;
     }
   }
+  console.log('useEffect - componentUpdateQueue = ', componentUpdateQueue);
   return effect;
 }
 
